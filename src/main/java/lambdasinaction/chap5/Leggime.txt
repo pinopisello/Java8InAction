@@ -1,0 +1,44 @@
+
+#################	Mapping.java ###################
+
+ <R> Stream<R> flatMap(Function<? super T, ? extends Stream<? extends R>> mapper);
+ 
+Stream.flatMap() mappa 1 elemento T dello stream in un proprio Stream<R> e poi unisce tutti questi streams in un unico Stream<R>.
+
+Lo uso per convertire : {"Hello", "World"} => {"H","e","l","l","0",.....}
+
+In questo caso : Stream<Char> flatMap(Function(String,Stream<Char>))  => (String line) -> Arrays.stream(line.split("")
+
+flatMap unisce in un unico Stream tutti gli stream prodotti dalla Function!!
+
+String => String[] => Stream<Char>
+
+Ogni word diventa uno Stream<Char> e questi stream devono mergersi in un unico 
+
+
+
+
+Altro caso e' come combinare due Lists.
+
+Date list [1, 2, 3] and a list [3, 4], trova tutte le coppie la cui somma sia divisibile da 3.
+
+ numbers1.stream().flatMap((Integer i) -> numbers2.stream().map((Integer j) -> new int[]{i, j}))
+ 
+A partire da uno Stream<int> si genera uno Stream<int[]> contenente le coppie/permutazioni.
+
+.filter(pair -> (pair[0] + pair[1]) % 3 == 0).collect(toList()) fa il resto.
+
+
+R Stream<T>.collect(Collector<? super T, A, R> collector)
+
+Uno Stream<T> ritorna risultato R usando Collector<T,A,R> ossia Collector che ha: T input 
+																				A accumulation type
+																				R risultato
+																				
+																				
+																				
+ 
+ 
+ 
+ 
+ 

@@ -1,0 +1,24 @@
+I Predicates permettono di semplificare codice passando metodi (behaviour) ad altri metodi.
+
+Invece di 3 metodi :
+
+
+public static List<Apple> filterApplesByWeight(List<Apple> inventory, int weight){
+public static List<Apple> filterApplesByColor(List<Apple> inventory, String color){\
+public static List<Apple> filterGreenApples(List<Apple> inventory){
+
+
+	
+Si usa 1 metodo e 3 predicates (method refrences/lambdas):
+
+public static List<Apple> filter(List<Apple> inventory, ApplePredicate p){
+
+
+Labmdas sono method references anonymous!!
+
+
+
+
+
+
+

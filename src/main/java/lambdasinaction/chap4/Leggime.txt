@@ -1,0 +1,67 @@
+Filtrare ed ordinare una List in java7 (iterators) e in java8 (Streams).
+
+List extends Collection che ha :
+stream() e parallelStream() che ritornano uno Stream
+Spliterator spliterator() che ritorna uno Spliterator
+
+
+Una volta che ho uno stream attaccato alla lista, posso usare tutti gli Stream methods che 
+accettano "Predicate" come input come:
+
+<R> Stream<R> map(Function<? super T, ? extends R> mapper);
+Stream<T> filter(Predicate<? super T> predicate);
+Stream<T> sorted();
+
+##########   StreamBasic.java   ############
+
+getLowCaloricDishesNamesInJava7() filtra in Dish.menu :
+
+i Dish che hanno calories<400
+li sorta in ordine crescente dicalories
+ritorna una lista di detti Dish con solo I nomi
+
+per farlo usa 2 extra lists e 2 iterazioni .
+
+getLowCaloricDishesNamesInJava8() fa la stessa cosa ma usando stream e i metodi stream :
+
+Stream<T>.filter(Predicate<T>)
+Stream<T>.sorted(Comparator<T>)
+Stream<T>.map(Function<? super T, ? extends R> mapper)  [ritorna Stream<R>]
+Stream<T>.collect()
+
+
+Praticamente tutti i metodi di Stream accettano lambdas, ecco perche tutto tempo speso chapters 1-3...
+
+In java8 dice COSA fare senza fotterti del COME viene fatto.
+In java7 devi occuparti dei dettagli...
+
+
+##########   StreamVsCollection.java   ############
+
+Lancia una IllegalStateException perche uno stream viene consumato piu di una volta!!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

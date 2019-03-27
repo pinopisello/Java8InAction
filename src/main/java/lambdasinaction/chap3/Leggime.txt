@@ -1,0 +1,84 @@
+Lambda e' un metodo anonimo che non appartiene a nessuna classe e che puo essere passato ad un altro metodo.
+
+E' fatta da (arg1,arg2,...argn) ->{statements;} o (arg1,arg2,...argn) -> (expression)
+
+Quando posso usare un lambda? In tutti i casi sia assimilabile ad un "functional interface", ossia come implementazione on line dell inteface.
+
+A "functional interface" is an interface that specifies exactly one abstract method.
+
+Tipo:
+
+public interface Comparator<T> {
+    int compare(T o1, T o2);
+}
+
+quindi e' vero che:
+
+
+Comparator<Apple> byWeight = new Comparator<Apple>() {
+    public int compare(Apple a1, Apple a2){                 ==> Comparator<Apple> byWeight = (Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight())
+        return a1.getWeight().compareTo(a2.getWeight());
+    }
+};
+
+
+Runnable r = new Runnable(){
+    public void run(){
+￼￼￼		System.out.println("Hello World 2");       => Runnable r = () -> System.out.println("Hello World 1");
+	} 
+};
+
+
+###########   ExecuteAround.java   #############
+
+processFileLimited() apre un file,crea un reader e finalmente legge una linea.
+
+processFile(BufferedReaderProcessor) e' la stessa funzionalita ma accetta una functional interface.
+Esso apre un file,crea un reader  e poi applica il behavior espresso dalla labda passata.
+Cosi evito di riscrivere il boilerplate code per aprire file e posso passare lambdas per leggere una line, 2 linee, etc.
+
+###########   Sorting.java         #############
+
+Diversi modi di usare Comparator:
+
+1)custom AppleComparator che implementa Comparator
+
+2)custom anonymous inline comparator
+
+3)lambda expression come comparator
+
+4)comparator ottenuto da Comparator<T> Comparator.comparing(Function<? super T, ? extends U> keyExtractor,Comparator<? super U> keyComparator
+
+5)comparator ottenuto da Comparator<T> Comparator.comparing(Function<? super T, ? extends U> keyExtractor)
+  In questo caso due comparators sono chained quindi la lista viene prima ordinata da weight poi da color.
+
+
+In 4 e 5 si usa un method reference al posto della lambda.
+In breve si parte da una lambda:
+
+Comparator<T> Comparator.comparing( 								 Comparator.comparing((a)->a.getWeight() )     Comparator.comparing(Apple::getWeight )  
+            Function<? super T, ? extends U> keyExtractor, => 											   => 
+            Comparator<? super U> keyComparator)
+
+Insomma se il body della lambda e' una chiamata ad un SOLO metodo di un input object, si puo sostituirla con reference di detto metodo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+  

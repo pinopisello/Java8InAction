@@ -1,0 +1,30 @@
+==========  Method references e pssing code as argument ================
+
+
+
+Prima di java8, i "types" erano :
+
+1)primitive (float, int,etc)
+
+2)objects
+
+Con java8 ci sono anche:
+
+3) "method references" (ex File::hidden) per File.isHidden()
+
+
+###########    FilteringApples    ############
+FilteringApples::isGreenApple e' method references ed e'passato a filterApples() come parametro!!
+
+Lambda sono methodi ma anonimi, scritti con una particolarre sintassi.
+
+Per esempio :
+
+public static boolean isGreenApple(Apple apple) {  
+        return "green".equals(apple.getColor());     ==> (Apple a) -> "green".equals(a.getColor())
+    }
+
+Ergo i seguenti sono identici:
+
+
+List<Apple> greenApples = filterApples(inventory, FilteringApples::isGreenApple); === List<Apple> greenApples2 = filterApples(inventory, (Apple a) -> "green".equals(a.getColor()));
